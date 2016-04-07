@@ -43,7 +43,11 @@ Implémentation:
 	});
 
 ```
+Le test est lancer avec la commande:
 
+    gulp test:unit
+    
+    
 Karma
 -------------
 Packages  nécessaires:
