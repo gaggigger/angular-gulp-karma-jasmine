@@ -52,13 +52,13 @@ Implémentation:
 		})).on('error', function(e) {
 			logger.error("[test:unit] desktop error : " + e);
 		}),
-			gulp.src(paths.unitTest + 'karma_html/report-summary-filename/index.html')
+			gulp.src(paths.unitTest + 'karma_html/index.html')
 			.pipe(gulp.dest('karma_html/history/report-'+ new Date().getTime()));
 	});
 
 	gulp.task('open', function(){
 		setTimeout(function(){
-			gulp.src(paths.unitTest + '/karma_html/report-summary-filename/index.html')
+			gulp.src(paths.unitTest + '/karma_html/index.html')
 				.pipe(open());
 		}, 5000)
 	});
@@ -155,7 +155,7 @@ Implémentation:
   			// remplaces les " " par des  "_" pour les noms de dossiers et de fichiers
   			urlFriendlyName: false, 
   			// Nom du rapport
-  			reportName: 'report-summary-filename', 
+  			reportName: 'report-summary', 
   			
   			// experimental
   			// Laisser déployer ou non les descriptions
