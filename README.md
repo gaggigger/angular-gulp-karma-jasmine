@@ -2,8 +2,15 @@
 
 ## Setup Instructions
 
+* Installer les dépendances
 * Paramétrer Gulp
 * Paramétrer Karma
+
+Dépendances
+-------------
+NPM est préconfiguré pour exécuter automatiquement bower afin que nous puissions simplement faire: 
+
+    npm install
 
 
 Gulp
