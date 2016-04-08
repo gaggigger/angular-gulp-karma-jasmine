@@ -23,31 +23,47 @@ Implémentation:
 
 ```javascript
   // gulpFile.js
-  var open = require('gulp-open');
-   
-  gulp.task('test:unit', ['unit', 'open']);
-   
+  (function() {
+
+	'use strict';
+	var gulp        	= require('gulp'),
+		open 		= require('gulp-open'),
+		g           	= require('gulp-load-plugins')(),
+		conf        	= require('./package.json'),
+		paths       	= conf.paths, // à configurer dans le package.json 
+		logger		= require('log4js').getLogger(),
+		fs		= require('fs');
+
+
+	gulp.task('test:unit', ['unit', 'open']);
+
+
 	gulp.task('unit', function() {
 		return gulp.src([
-			paths.src + '/' + js_file_name,
-			path_bower_dev + '/angular-mocks/angular-mocks.js',
-			paths.src  + '/views/**/*_test.js'
+			paths.bower + '/angular/angular.js',
+			paths.bower + '/angular-route/angular-route.js',
+			paths.bower + '/angular-mocks/angular-mocks.js',
+			paths.src + '/app.js',
+			paths.src + '/view*/*.js'
 		])
 			.pipe(g.karma({
-			configFile: paths.test + '/karma.conf.js',
+			configFile: 'karma.conf.js',
 			action: 'run'
 		})).on('error', function(e) {
 			logger.error("[test:unit] desktop error : " + e);
 		}),
-			gulp.src(paths.test + '/karma_html/report-summary-filename/index.html')
-			.pipe(gulp.dest(paths.test + '/karma_html/history/report-'+ new Date().getTime()));
+			gulp.src(paths.unitTest + 'karma_html/report-summary-filename/index.html')
+			.pipe(gulp.dest('karma_html/history/report-'+ new Date().getTime()));
 	});
+
 	gulp.task('open', function(){
 		setTimeout(function(){
-			gulp.src(paths.test + '/karma_html/report-summary-filename/index.html')
+			gulp.src(paths.unitTest + '/karma_html/report-summary-filename/index.html')
 				.pipe(open());
 		}, 5000)
 	});
+
+}());
 
 ```
 Le test est lancer avec la commande:
