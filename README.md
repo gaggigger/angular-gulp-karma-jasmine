@@ -53,7 +53,7 @@ Implémentation:
 			logger.error("[test:unit] desktop error : " + e);
 		}),
 			gulp.src(paths.unitTest + 'karma_html/index.html')
-			.pipe(gulp.dest('karma_html/history/report-'+ new Date().getTime()));
+			.pipe(gulp.dest(paths.unitTest + 'karma_html/history/report-'+ new Date().getTime()));
 	});
 
 	gulp.task('open', function(){
@@ -143,7 +143,7 @@ Implémentation:
   		},
   		htmlReporter: {
   		  // Répertoire dans lequel sauvegarder les rapports
-  			outputDir: 'test/karma_html',
+  			outputDir: 'unit-tests',
   			// à modifier si le  jasmine_template.html est déplacé
   			templatePath: null,
   			// focus sur l'onglet des erreurs
@@ -155,7 +155,7 @@ Implémentation:
   			// remplaces les " " par des  "_" pour les noms de dossiers et de fichiers
   			urlFriendlyName: false, 
   			// Nom du rapport
-  			reportName: 'report-summary', 
+  			reportName: 'karma_html', 
   			
   			// experimental
   			// Laisser déployer ou non les descriptions
