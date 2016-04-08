@@ -19,7 +19,8 @@
 			paths.bower + '/angular-route/angular-route.js',
 			paths.bower + '/angular-mocks/angular-mocks.js',
 			paths.src + '/app.js',
-			paths.src + '/view*/*.js'
+			paths.src + '/view*/*.js',
+			paths.src + '/components/**/*.js'
 		])
 			.pipe(g.karma({
 			configFile: 'karma.conf.js',
