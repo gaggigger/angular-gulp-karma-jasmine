@@ -1,14 +1,26 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+	var myApp = angular.module('myApp.view1', [
+		'ui.router'
+	]);
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
-  });
-}])
+	function routeConfig($urlRouterProvider, $stateProvider, $locationProvider) {
+		$stateProvider.state('view1', {
+			url: '/view1',
+			templateUrl: 'view1/view1.html',
+			controller: 'View1Ctrl',
+			controllerAs: 'ctrl'
+		});
 
-.controller('View1Ctrl', [function() {
+	}
 
-}]);
+	function View1Ctrl() {
+		var vm = this;
+
+	}
+
+	myApp.config(routeConfig);
+	myApp.controller('View1Ctrl', View1Ctrl);
+	routeConfig.$inject = ['$urlRouterProvider', '$stateProvider', '$locationProvider'];
+}());

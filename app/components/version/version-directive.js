@@ -1,9 +1,12 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('myApp.version.version-directive', [])
-
-.directive('appVersion', ['version', function(version) {
-  return function(scope, elm, attrs) {
-    elm.text(version);
-  };
-}]);
+	var myApp = angular.module('myApp.version.version-directive', []);
+	function appVersion(version) {
+		return function (scope, elm, attrs) {
+			elm.text(version);
+		};
+	}
+	myApp.directive('appVersion', appVersion);
+	appVersion.$inject = ['version'];
+}());

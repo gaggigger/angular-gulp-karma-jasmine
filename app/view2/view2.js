@@ -1,14 +1,26 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+	var myApp = angular.module('myApp.view2', [
+		'ui.router'
+	]);
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view2', {
-    templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
-  });
-}])
+	function routeConfig($urlRouterProvider, $stateProvider, $locationProvider) {
+		$stateProvider.state('view2', {
+			url: '/view2',
+			templateUrl: 'view2/view2.html',
+			controller: 'View2Ctrl',
+			controllerAs: 'ctrl'
+		});
 
-.controller('View2Ctrl', [function() {
+	}
 
-}]);
+	function View2Ctrl() {
+		var vm = this;
+
+	}
+
+	myApp.config(routeConfig);
+	myApp.controller('View2Ctrl', View2Ctrl);
+	routeConfig.$inject = ['$urlRouterProvider', '$stateProvider', '$locationProvider'];
+}());

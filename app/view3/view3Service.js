@@ -1,7 +1,9 @@
-angular.module('myApp.view3')
-	.factory("view3Service", ['$http',
-		function($http){
-		"use strict";
+(function () {
+	'use strict';
+
+	var myApp = angular.module('myApp.view3');
+
+	function view3Service($http) {
 		return {
 			page: null,
 			description_error: null,
@@ -12,9 +14,12 @@ angular.module('myApp.view3')
 			getViewPromise: function () {
 				return $http.get('/app/datas/view3.json')
 					.success(function (data) {
-						return response.data;
-					});
+					return response.data;
+				});
 			}
 		};
-		}
-	]);
+	}
+
+	myApp.factory('view3Service', view3Service);
+	view3Service.$inject = ['$http'];
+}());

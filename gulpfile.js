@@ -16,7 +16,8 @@
 	gulp.task('unit', function() {
 		return gulp.src([
 			paths.bower + '/angular/angular.js',
-			paths.bower + '/angular-route/angular-route.js',
+			paths.bower + '/angular-mocks/angular-mocks.js',
+			paths.bower + '/angular-ui-router/release/angular-ui-router.js',
 			paths.bower + '/angular-mocks/angular-mocks.js',
 			paths.src + '/app.js',
 			paths.src + '/view*/*.js',
