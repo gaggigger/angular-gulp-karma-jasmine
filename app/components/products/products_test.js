@@ -24,15 +24,13 @@ describe('products tests', function () {
 	describe('mock.module mocking of service', function () {
 		beforeEach(angular.mock.module(function ($provide) {
 			$provide.service('ProductService', function mockService() {
-				return {
-					mockGetProducts: function () {
-						return [{
-							name: 'Tea'
-						}, {
-							name: 'Syrup'
-						}];
-					}
-				};
+				return function mockGetProducts() {
+					return [{
+						name: 'Tea'
+							}, {
+						name: 'Syrup'
+							}];
+				}
 			});
 		}));
 		// Note that ordering is important! Controller service must be registered after mocks.
@@ -51,6 +49,31 @@ describe('products tests', function () {
 			}]);
 		});
 	});
+
+	describe('in-line mocking of service', function () {
+		beforeEach(inject(function (_$controller_) {
+			$controller = _$controller_;
+			$scope = {};
+		}));
+		it('should return products list on load', function () {
+			var mockService = function ProductService() {
+				return [{
+					name: 'Tea'
+						}, {
+					name: 'Syrup'
+						}];
+			}
+			var vm = $controller('productsCtrl', {
+				$scope: $scope,
+				ProductService: mockService
+			});
+			expect(vm.products).toEqual([{
+				name: 'Tea'
+					}, {
+				name: 'Syrup'
+					}]);
+		});
+	});
 });
 describe('inline controller example', function () {
 
@@ -64,15 +87,15 @@ describe('inline controller example', function () {
 	}));
 	it('should return products list on load', function () {
 		var vm = $controller(function inlineController($scope, ProductService) {
-			vm.products = ProductService.getProducts();
+			$scope.products = ProductService();
 		}, {
 			$scope: $scope
 		});
-		expect(vm.products).toEqual([{
+		expect($scope.products).toEqual([{
 			name: 'Chai'
-		}, {
+					}, {
 			name: 'Syrup'
-		}]);
+					}]);
 	});
 });
 describe('inline controller example using controllerProvider', function () {
@@ -83,7 +106,7 @@ describe('inline controller example using controllerProvider', function () {
 
 	beforeEach(module(function ($controllerProvider) {
 		$controllerProvider.register('inlineController', function ($scope, ProductService) {
-			$scope.products = ProductService.getProducts();
+			$scope.products = ProductService();
 		});
 	}));
 	beforeEach(inject(function (_$controller_) {
@@ -94,11 +117,11 @@ describe('inline controller example using controllerProvider', function () {
 		var vm = $controller('inlineController', {
 			$scope: $scope
 		});
-		expect(vm.products).toEqual([{
+		expect($scope.products).toEqual([{
 			name: 'Chai'
-		}, {
+					}, {
 			name: 'Syrup'
-		}]);
+					}]);
 	});
 });
 describe('controller example using bindings', function () {

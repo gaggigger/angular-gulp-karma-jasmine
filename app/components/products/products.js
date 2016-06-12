@@ -6,7 +6,7 @@
 
 	function productsCtrl(ProductService) {
 		var vm = this;
-		vm.products = ProductService.getProducts();
+		vm.products = ProductService();
 
 	}
 
